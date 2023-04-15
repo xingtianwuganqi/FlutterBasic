@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 
+import 'package:flutter_printer/flutter_printer.dart';
+
 
 BaseOptions options = BaseOptions(
   baseUrl: NetWorkingConfig.baseUrl(),
@@ -35,26 +37,20 @@ class NetWorking {
   }
 
   static Future formDataPost(String url, Map<String,dynamic> dic,SuccessCallBack successBack,FailureCallBack failBack) async {
-    if (kDebugMode) {
-      print('😁😁😁');
-      print(url);
-      print(dic);
-    }
+    Printer.printMapJsonLog('😁😁😁');
+    Printer.printMapJsonLog(url);
+    Printer.printMapJsonLog(dic);
 
     try {
       FormData formData = FormData.fromMap(dic);
       var response = await dio.post(url,data: formData);
-      if (kDebugMode) {
-        print('++++++++++');
-        print(response.data);
-      }
+      Printer.printMapJsonLog('++++++++++');
+      Printer.printMapJsonLog(response.data);
       successBack(response.data);
     }catch(e){
       failBack(e);
-      if (kDebugMode) {
-        print('----======-----');
-        print(e);
-      }
+      Printer.printMapJsonLog("----======-----");
+      Printer.printMapJsonLog(e);
       if (e is DioError) {
         // 退出登录
         if (e.response?.statusCode == 403) {

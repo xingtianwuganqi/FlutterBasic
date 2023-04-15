@@ -15,6 +15,9 @@ dependencies:
   crypto: ^3.0.2
   platform_info: ^3.2.0
   shared_preferences: ^2.1.0
+  flutter_printer: ^2.0.3
+  flutter_easyloading: ^3.0.5
+  webview_flutter: ^3.0.4
 
 
 

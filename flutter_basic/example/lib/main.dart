@@ -1,15 +1,30 @@
+import 'package:example/home_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/base_model.dart';
+import 'package:flutter_basic/networking.dart';
+import 'package:flutter_basic/base_tabbar.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  //这里就是关键的代码，定义一个key
+  final GlobalKey<BaseTabBarState> _childViewKey = GlobalKey<BaseTabBarState>();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var pages = [const HomePage(), const ShowPage(), const MyPage()];
+    var items = [
+      BottomNavigationModel(selectIcon: 'assets/icons/icon_tabbar_cat_se.png', unSelectIcon: 'assets/icons/icon_tabbar_cat_un.png', title: '首页', isSelect: false, unreadNum: 0),
+      BottomNavigationModel(selectIcon: 'assets/icons/icon_tabbar_dog_se.png', unSelectIcon: 'assets/icons/icon_tabbar_dog_un.png', title: '首页', isSelect: false, unreadNum: 0),
+      BottomNavigationModel(selectIcon: 'assets/icons/icon_tabbar_msg_se.png', unSelectIcon: 'assets/icons/icon_tabbar_msg_un.png', title: '首页', isSelect: false, unreadNum: 0)
+    ];
+    var tabBar = BaseTabBar(key: _childViewKey,pages: pages, items: items);
+    _childViewKey.currentState?.uploadUnreadNum(2, 1);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -24,9 +39,15 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: tabBar,
     );
   }
+}
+
+
+class TabBar extends BaseTabBar {
+  TabBar({required super.pages, required super.items, required super.changed});
+
 }
 
 class MyHomePage extends StatefulWidget {
@@ -58,6 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    const String url = "http://test.rxswift.cn/api/v1/topiclist/";
+    var dic = {'page': 1, 'size': 10};
+    NetWorking.formDataPost(url, dic, (data) {
+      if (data['code'] == 200) {
+        if (kDebugMode) {
+          print(data);
+        }
+      }
+    }, (error) {
+
     });
   }
 
