@@ -6,14 +6,15 @@ import 'package:flutter_basic/networking.dart';
 import 'package:flutter_basic/base_tabbar.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
+//这里就是关键的代码，定义一个key
+final GlobalKey<BaseTabBarState> childViewKey = GlobalKey<BaseTabBarState>();
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
-  //这里就是关键的代码，定义一个key
-  final GlobalKey<BaseTabBarState> _childViewKey = GlobalKey<BaseTabBarState>();
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,7 @@ class MyApp extends StatelessWidget {
       BottomNavigationModel(selectIcon: 'assets/icons/icon_tabbar_dog_se.png', unSelectIcon: 'assets/icons/icon_tabbar_dog_un.png', title: '首页', isSelect: false, unreadNum: 0),
       BottomNavigationModel(selectIcon: 'assets/icons/icon_tabbar_msg_se.png', unSelectIcon: 'assets/icons/icon_tabbar_msg_un.png', title: '首页', isSelect: false, unreadNum: 0)
     ];
-    var tabBar = BaseTabBar(key: _childViewKey,pages: pages, items: items);
-    _childViewKey.currentState?.uploadUnreadNum(2, 1);
+    var tabBar = BaseTabBar(key: childViewKey,pages: pages, items: items);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
