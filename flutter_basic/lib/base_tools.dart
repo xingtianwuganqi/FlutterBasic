@@ -9,6 +9,18 @@ String get comPhotoKey => '${DateTime.now().millisecondsSinceEpoch}/${ToolConfig
 
 typedef commentInfoChanged = void Function(int id,dynamic info);
 typedef clickChange = void Function(int index);
+
+AppIdEnum appIdentifier = AppIdEnum.none;
+void setAppIdentifier(AppIdEnum type) {
+  appIdentifier = type;
+}
+
+enum AppIdEnum{
+  zmtm,
+  plan,
+  none,
+}
+
 /// 颜色
 class ColorsUtil {
   /// 十六进制颜色，
@@ -34,7 +46,14 @@ class ColorsUtil {
   static Color fromEnum(ColorEnum value) {
     switch(value) {
       case ColorEnum.system:
-        return ColorsUtil.hexColor('#ffa500');
+        switch (appIdentifier) {
+          case AppIdEnum.zmtm:
+            return ColorsUtil.hexColor('#ffa500');
+          case AppIdEnum.plan:
+            return ColorsUtil.hexColor('#80D0BC');
+          default:
+            return Colors.white;
+        }
       case ColorEnum.title:
         return ColorsUtil.hexColor('#333333');
       case ColorEnum.content:
