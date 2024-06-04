@@ -1,9 +1,14 @@
+import 'package:flutter/cupertino.dart';
+
 class BottomNavigationModel {
   String selectIcon;
   String unSelectIcon;
   String title;
   bool isSelect = false;
   int unreadNum = 0;
+  AssetImage? selectImg;
+  AssetImage? unSelectImg;
+
   BottomNavigationModel(
       {
         required this.selectIcon,
@@ -11,6 +16,8 @@ class BottomNavigationModel {
         required this.title,
         required this.isSelect,
         required this.unreadNum,
+        this.selectImg,
+        this.unSelectImg,
       }
   );
 

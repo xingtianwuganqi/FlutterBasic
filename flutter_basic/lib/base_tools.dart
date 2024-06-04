@@ -46,14 +46,7 @@ class ColorsUtil {
   static Color fromEnum(ColorEnum value) {
     switch(value) {
       case ColorEnum.system:
-        switch (appIdentifier) {
-          case AppIdEnum.zmtm:
-            return ColorsUtil.hexColor('#ffa500');
-          case AppIdEnum.plan:
-            return ColorsUtil.hexColor('#80D0BC');
-          default:
-            return Colors.white;
-        }
+        return ColorsUtil.hexColor('#ffa500');
       case ColorEnum.title:
         return ColorsUtil.hexColor('#333333');
       case ColorEnum.content:
@@ -76,6 +69,10 @@ class ColorsUtil {
         return ColorsUtil.hexColor('#707070');
       case ColorEnum.backColor:
         return ColorsUtil.hexColor('#FAF9FA');
+      case ColorEnum.backGround:
+        return ColorsUtil.hexColor("#F2F2F5");
+      case ColorEnum.lineColor:
+        return ColorsUtil.hexColor("#EEEEEE");
       default:
         return ColorsUtil.hexColor('#000000');
     }
@@ -94,6 +91,8 @@ enum ColorEnum {
   urlColor,
   iconColor,
   backColor,
+  backGround,
+  lineColor,
 }
 
 /// 字体大小
@@ -103,7 +102,7 @@ class FontUtil {
       case FontSizeEnum.big:
         return 22.0;
       case FontSizeEnum.title:
-        return 18.0;
+        return 19.0;
       case FontSizeEnum.content:
         return 17.0;
       case FontSizeEnum.mark:
@@ -128,12 +127,6 @@ enum FontSizeEnum {
   desc,
   time,
   small,
-}
-
-// 我的页面类型
-enum MyPageType {
-  myPage,
-  otherPage
 }
 
 var codeStr = "伍c七Alz1θVx2ψLHNpfωv九nξ捌τD六053λwGμrMνRuegsη八γ陆jOBX8ρ三E9πFS零bδοmkχ7K6PβϵϕoZ五iυU一Jq柒ydYt四QhW4玖κCIαζTaι二σ";
@@ -193,8 +186,6 @@ print([difference.inDays, difference.inHours]);//d1与d2相差的天数与小时
     String regexEmail = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*\$";
     return RegExp(regexEmail).hasMatch(input);
   }
-
-
 
 
   static String encryptionString(String codeStr) {
@@ -257,12 +248,6 @@ print([difference.inDays, difference.inHours]);//d1与d2相差的天数与小时
     }
   }
 }
-//
-/// 无参数
-// typedef ActionNoParam = void Function();
-/// 有参数
-// typedef ChangedCallBack<T> = void Function(T value);
-
 
 /// 空白页
 // ignore: must_be_immutable

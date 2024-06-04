@@ -12,7 +12,6 @@ extension ColorExt on Color {
     var colorInt = int.parse(hex,radix: 16);
     return Color(colorInt | 0xFF000000);
   }
-
 }
 
 extension StringExt on String {
