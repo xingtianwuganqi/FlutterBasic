@@ -6,6 +6,7 @@ import 'package:flutter_printer/flutter_printer.dart';
 
 BaseOptions options = BaseOptions(
   baseUrl: NetWorkingConfig.getBaseUrl(),
+  headers: NetWorkingConfig.getHeader(),
   connectTimeout: const Duration(seconds: 10),
   receiveTimeout: const Duration(seconds: 10),
 );
@@ -68,17 +69,13 @@ enum UrlConfig {
   local
 }
 
-enum ThumbType {
-  thumbNail,
-  thumbFour,
-  thumbSeven,
-}
-
 class NetWorkingConfig {
   static UrlConfig urlConfig = UrlConfig.test;
   static String formalUrl = '';
   static String testUrl = '';
   static String localUrl = '';
+  static Map<String, dynamic>? header;
+  static String imgBaseUrl = '';
 
   static String getBaseUrl() {
     switch (NetWorkingConfig.urlConfig) {
@@ -91,6 +88,10 @@ class NetWorkingConfig {
       default:
         return "";
     }
+  }
+
+  static Map<String, dynamic>? getHeader() {
+    return NetWorkingConfig.header;
   }
 
   static void setFormalUrl(String formalUrl) {
@@ -107,6 +108,14 @@ class NetWorkingConfig {
 
   static void setConfig(UrlConfig config) {
     NetWorkingConfig.urlConfig = config;
+  }
+
+  static void setImgBaseUrl(String imgBaseUrl) {
+    NetWorkingConfig.imgBaseUrl = imgBaseUrl;
+  }
+
+  static void setHeader(Map<String, dynamic>? header) {
+    options.headers = header;
   }
 }
 
