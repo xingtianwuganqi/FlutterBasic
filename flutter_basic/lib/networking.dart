@@ -18,7 +18,7 @@ typedef FailureCallBack = void Function(dynamic error);
 
 class NetWorking {
 
-  static Future get(String url,SuccessCallBack successBack,FailureCallBack failBack,{Map<String,dynamic>? params}) async{
+  static Future get(String url,Map<String,dynamic>? params,SuccessCallBack successBack,FailureCallBack failBack) async{
     try {
       var response = await dio.get(url,queryParameters: params);
       successBack(response.data);
@@ -27,7 +27,7 @@ class NetWorking {
     }
   }
 
-  static Future post(String url,SuccessCallBack successBack,FailureCallBack failBack,{Map<String,dynamic>? params}) async {
+  static Future post(String url,Map<String,dynamic>? params ,SuccessCallBack successBack,FailureCallBack failBack) async {
     try {
       var response = await dio.post(url,data:params);
       successBack(response.data);
@@ -51,13 +51,40 @@ class NetWorking {
       failBack(e);
       Printer.printMapJsonLog("----======-----");
       Printer.printMapJsonLog(e);
-      if (e is DioError) {
+      if (e is DioException) {
         // 退出登录
-        if (e.response?.statusCode == 403) {
+        if (e.response?.statusCode == 401) {
           // EasyLoading.showToast('认证有误,请重新登录');
           // UserManager.instance.logout();
         }
       }
+    }
+  }
+
+  static Future delete(String url, Map<String, dynamic>? dic, SuccessCallBack successBack, FailureCallBack failBack) async {
+    try {
+      var response = await dio.delete(url, data: dic);
+      successBack(response.data);
+    }catch(e) {
+      failBack(e);
+    }
+  }
+
+  static Future put(String url, Map<String, dynamic>? dic, SuccessCallBack successBack, FailureCallBack failBack) async {
+    try {
+      var response = await dio.put(url, data: dic);
+      successBack(response.data);
+    }catch(e) {
+      failBack(e);
+    }
+  }
+
+  static Future patch(String url, Map<String, dynamic>? dic, SuccessCallBack successBack, FailureCallBack failBack) async {
+    try {
+      var response = await dio.patch(url, data: dic);
+      successBack(response.data);
+    }catch(e) {
+      failBack(e);
     }
   }
 }
