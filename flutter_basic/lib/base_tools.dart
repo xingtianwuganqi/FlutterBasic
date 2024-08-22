@@ -143,13 +143,6 @@ class ToolConfig {
     return left;
   }
 
-  /*
-  var d1 = new DateTime(2018, 10, 1);
-var d2 = new DateTime(2018, 10, 10);
-var difference = d1.difference(d2);
-print([difference.inDays, difference.inHours]);//d1与d2相差的天数与小时
-
-   */
   static String timeT(String? time) {
     if (time == null) {
       return "";
