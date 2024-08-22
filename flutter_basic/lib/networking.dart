@@ -21,6 +21,8 @@ class NetWorking {
   static Future get(String url,Map<String,dynamic>? params,SuccessCallBack successBack,FailureCallBack failBack) async{
     try {
       var response = await dio.get(url,queryParameters: params);
+      Printer.printMapJsonLog('get request ++++++++++');
+      Printer.printMapJsonLog(response.data);
       successBack(response.data);
     }catch (e){
       failBack(e);
@@ -30,6 +32,8 @@ class NetWorking {
   static Future post(String url,Map<String,dynamic>? params ,SuccessCallBack successBack,FailureCallBack failBack) async {
     try {
       var response = await dio.post(url,data:params);
+      Printer.printMapJsonLog('post request ++++++++++');
+      Printer.printMapJsonLog(response.data);
       successBack(response.data);
     }catch(e) {
       failBack(e);
@@ -44,7 +48,7 @@ class NetWorking {
     try {
       FormData formData = FormData.fromMap(dic);
       var response = await dio.post(url,data: formData);
-      Printer.printMapJsonLog('++++++++++');
+      Printer.printMapJsonLog('post request ++++++++++');
       Printer.printMapJsonLog(response.data);
       successBack(response.data);
     }catch(e){
@@ -64,6 +68,8 @@ class NetWorking {
   static Future delete(String url, Map<String, dynamic>? dic, SuccessCallBack successBack, FailureCallBack failBack) async {
     try {
       var response = await dio.delete(url, data: dic);
+      Printer.printMapJsonLog('delete request ++++++++++');
+      Printer.printMapJsonLog(response.data);
       successBack(response.data);
     }catch(e) {
       failBack(e);
@@ -73,6 +79,8 @@ class NetWorking {
   static Future put(String url, Map<String, dynamic>? dic, SuccessCallBack successBack, FailureCallBack failBack) async {
     try {
       var response = await dio.put(url, data: dic);
+      Printer.printMapJsonLog('put request ++++++++++');
+      Printer.printMapJsonLog(response.data);
       successBack(response.data);
     }catch(e) {
       failBack(e);
@@ -82,6 +90,8 @@ class NetWorking {
   static Future patch(String url, Map<String, dynamic>? dic, SuccessCallBack successBack, FailureCallBack failBack) async {
     try {
       var response = await dio.patch(url, data: dic);
+      Printer.printMapJsonLog('patch request ++++++++++');
+      Printer.printMapJsonLog(response.data);
       successBack(response.data);
     }catch(e) {
       failBack(e);
