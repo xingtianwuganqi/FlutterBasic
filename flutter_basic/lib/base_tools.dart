@@ -240,6 +240,35 @@ class ToolConfig {
       return 0;
     }
   }
+
+  static String loadImgUrl(String url,{ThumbType bType}) {
+    var headImg = '';
+    if (url.contains("http")) {
+      headImg = url;
+    }else{
+      switch (bType) {
+        case ThumbType.thumbNail: {
+          headImg = NetWorkingConfig.imgBaseUrl + url + NetWorkingConfig.imgNailTail;
+        }
+        break;
+        case ThumbType.thumbFour: {
+          headImg = NetWorkingConfig.imgBaseUrl + url + NetWorkingConfig.imgFourTail;
+        }
+        break;
+        case ThumbType.thumbSeven: {
+          headImg = NetWorkingConfig.imgBaseUrl + url + NetWorkingConfig.imgSevenTail;
+        }
+        break;
+        default: {
+          headImg = NetWorkingConfig.imgBaseUrl + url;
+        }
+        break;
+      }
+
+    }
+    return headImg;
+  }
+
 }
 
 /// 空白页
