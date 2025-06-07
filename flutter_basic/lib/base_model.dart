@@ -31,8 +31,3 @@ class BottomNavigationModel {
     );
   }
 }
-
-
-enum ThumbType {
-
-}

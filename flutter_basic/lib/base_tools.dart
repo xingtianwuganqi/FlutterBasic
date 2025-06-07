@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'base_model.dart';
+import 'networking.dart';
+
 /// photo 的key
 String get comPhotoKey => '${DateTime.now().millisecondsSinceEpoch}/${ToolConfig.random()}.png';
 
@@ -241,30 +244,16 @@ class ToolConfig {
     }
   }
 
-  static String loadImgUrl(String url,{ThumbType bType}) {
+  static String loadImgUrl(String url,[String? postfixStr]) {
     var headImg = '';
     if (url.contains("http")) {
       headImg = url;
     }else{
-      switch (bType) {
-        case ThumbType.thumbNail: {
-          headImg = NetWorkingConfig.imgBaseUrl + url + NetWorkingConfig.imgNailTail;
-        }
-        break;
-        case ThumbType.thumbFour: {
-          headImg = NetWorkingConfig.imgBaseUrl + url + NetWorkingConfig.imgFourTail;
-        }
-        break;
-        case ThumbType.thumbSeven: {
-          headImg = NetWorkingConfig.imgBaseUrl + url + NetWorkingConfig.imgSevenTail;
-        }
-        break;
-        default: {
-          headImg = NetWorkingConfig.imgBaseUrl + url;
-        }
-        break;
+      if ((postfixStr ?? "").isNotEmpty) {
+        headImg = NetWorkingConfig.imgBaseUrl + url + (postfixStr ?? "");
+      }else{
+        headImg = NetWorkingConfig.imgBaseUrl + url;
       }
-
     }
     return headImg;
   }
